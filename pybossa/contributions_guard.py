@@ -17,18 +17,20 @@
 # along with PYBOSSA.  If not, see <http://www.gnu.org/licenses/>.
 
 from pybossa.model import make_timestamp
-
+from pybossa import default_settings as settings
 
 class ContributionsGuard(object):
 
     KEY_PREFIX = 'pybossa:task_requested:user:%s:task:%s'
-    STAMP_TTL = 60 * 60 * 12
+    STAMP_TTL = settings.TASK_STAMP_TTL
 
     def __init__(self, redis_conn):
+        print('Init: Using TTL of ' + str(self.STAMP_TTL))
         self.conn = redis_conn
 
     def stamp(self, task, user):
         key = self._create_key(task, user)
+        print("Using TTL of " + str(self.STAMP_TTL))
         self.conn.setex(key, self.STAMP_TTL, make_timestamp())
 
     def check_task_stamped(self, task, user):

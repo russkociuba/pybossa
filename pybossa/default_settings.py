@@ -81,8 +81,8 @@ USER_TIMEOUT = 15 * 60
 USER_TOP_TIMEOUT = 24 * 60 * 60
 USER_TOTAL_TIMEOUT = 24 * 60 * 60
 
-#Task Cache Timeout
-TASK_STAMP_TTL = 60 * 60 * 12
+# TTL for tasks to be completed before they are invalidated, in minutes
+TASK_TTL = 60 * 60
 
 # Project Presenters
 PRESENTERS = ["basic", "image", "sound", "video", "map", "pdf"]
